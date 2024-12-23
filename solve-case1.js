@@ -1,5 +1,23 @@
 const fruits = [
     {
+        fruitId: 10,
+        fruitName: 'Anggur',
+        fruitType: 'INTERNASIONAL',
+        stock: 10
+    },
+    {
+        fruitId: 1,
+        fruitName: 'Jambu',
+        fruitType: 'CAMPURAN',
+        stock: 10
+    },
+    {
+        fruitId: 1,
+        fruitName: 'Melon',
+        fruitType: 'IMPORT',
+        stock: 10
+    },
+    {
         fruitId: 1,
         fruitName: 'Apel',
         fruitType: 'IMPORT',
@@ -43,9 +61,27 @@ const fruits = [
     }
 ];
 
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+    );
+}
+
+// function extractFruitNames(fruits) {
+//     const fruitsName = fruits.map(fruit => toTitleCase(fruit.fruitName));
+//     let uniqueFruits = [...new Set(fruitsName)];
+//     return uniqueFruits;
+// };
+
 function extractFruitNames(fruits) {
-    const fruitsName = fruits.map(fruit => fruit.fruitName);
-    let uniqueFruits = [...new Set(fruitsName)];
+    const fruitsName = fruits.map(fruit => toTitleCase(fruit.fruitName));
+    const uniqueFruits = [];
+    fruitsName.forEach(item => {
+        if (!uniqueFruits.includes(item)) {
+            uniqueFruits.push(item)
+        }
+    });
     return uniqueFruits;
 };
 
@@ -72,6 +108,7 @@ console.log("2. Andi memisahkan buahnya menjadi beberapa wadah berdasarkan tipe 
 console.log("Jumlah wadah yang dibutuhkan:", countFruitsTypes(fruits));
 console.log("IMPORT:", groupedFruits.IMPORT || []);
 console.log("LOCAL:", groupedFruits.LOCAL || [], "\n");
+console.log("semua : ", groupedFruits);
 
 function groupFruitsByTypeAndCountStock(fruits) {
     return fruits.reduce((grouped, fruit) => {

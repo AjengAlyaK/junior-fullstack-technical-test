@@ -14,6 +14,10 @@ const comments = [
                     {
                         commentId: 112,
                         commentContent: 'Haai juga hai jugaa'
+                    },
+                    {
+                        commentId: 113,
+                        commentContent: ''
                     }
                 ]
             },
@@ -35,11 +39,22 @@ const comments = [
     }
 ];
 
+// function countTotalComments(comments) {
+//     let total = 0;
+//     comments.forEach(comment => {
+//         total++;
+//         if (comment.replies) {
+//             total += countTotalComments(comment.replies);
+//         }
+//     });
+//     return total;
+// };
+
 function countTotalComments(comments) {
     let total = 0;
     comments.forEach(comment => {
         total++;
-        if (comment.replies) {
+        if (comment.commentContent) {
             total += countTotalComments(comment.replies);
         }
     });
